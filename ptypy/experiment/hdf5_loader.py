@@ -228,7 +228,7 @@ class Hdf5Loader(PtyScan):
     default = 
     type = Param
     help = Parameters for the filtering of frames
-    doc = The shape of loaded data is assumed to hvae the same dimensionality as data.shape[:-2]
+    doc = The shape of loaded data is assumed to have the same dimensionality as data.shape[:-2]
 
     [framefilter.file]
     default = None
