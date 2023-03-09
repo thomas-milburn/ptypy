@@ -40,7 +40,7 @@ jobs:
           tags: localhost:5000/ptypy/${{ matrix.platform }}_py${{ matrix.python-version }}_dev:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          target: env.TARGET
+          target: ${{ env.TARGET }}
           file: ./Dockerfile
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
