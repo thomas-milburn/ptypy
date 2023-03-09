@@ -43,7 +43,7 @@ jobs:
       matrix:
         python-version: ['3.7','3.8','3.9','3.10']
         platform: ['core', 'pycuda', 'cupy']
-      name: Running tests for ${{ matrix.platform }} with Python ${{ matrix.python-version }}
+    name: Running tests for ${{ matrix.platform }} with Python ${{ matrix.python-version }}
     container:
       image: registry/ptycho/ptypy/${{ matrix.platform }}_py${{ matrix.python-version }}_dev:${{ github.sha }}
     steps:
