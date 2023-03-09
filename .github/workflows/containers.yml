@@ -20,19 +20,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build Image
-        uses: docker/build-push-action@v1
-	with:
-	  context: .
-	  registry: registry
-	  repository: ptycho/ptypy/${{ matrix.platform }}_py${{ matrix.python-version }}_dev
-	  tags: ${{ github.sha }}
-	  cache-from: type=gha
-	  cache-to: type=gha,mode=max
-	  target: echo $(if [[ (${{ matrix.platform }} == "pycuda" || [${{ matrix.platform }} == "cupy") ]]; then echo accelerate; else echo core; fi)
-	  file: ./Dockerfile
-	  build-args: |
-	    PYTHON_VERSION=${{ matrix.python-version }}
-	    PLATFORM=${{ matrix.platform }}
+        uses: docker/build-push-action@v4
+        with:
+        context: .
+          registry: registry
+          repository: ptycho/ptypy/${{ matrix.platform }}_py${{ matrix.python-version }}_dev
+          tags: ${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          target: echo $(if [[ (${{ matrix.platform }} == "pycuda" || [${{ matrix.platform }} == "cupy") ]]; then echo accelerate; else echo core; fi)
+          file: ./Dockerfile
+          build-args: |
+            PYTHON_VERSION=${{ matrix.python-version }}
+            PLATFORM=${{ matrix.platform }}
 
   test:
     needs: [build-image]
