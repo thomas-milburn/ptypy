@@ -20,7 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build Image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v1
 	with:
 	  context: .
 	  registry: registry
