@@ -30,6 +30,8 @@ jobs:
         uses: docker/setup-buildx-action@v2
         with:
           driver-opts: network=host
+      - name: Generate target
+        run: echo TARGET=$(if [[ (${{ matrix.platform }} == "pycuda" || [${{ matrix.platform }} == "cupy") ]]; then echo accelerate; else echo core; fi) >> $GITHUB_ENV
       - name: Build Image and push to local registry
         uses: docker/build-push-action@v4
         with:
@@ -38,7 +40,7 @@ jobs:
           tags: localhost:5000/ptypy/${{ matrix.platform }}_py${{ matrix.python-version }}_dev:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          target: echo $(if [[ (${{ matrix.platform }} == "pycuda" || [${{ matrix.platform }} == "cupy") ]]; then echo accelerate; else echo core; fi)
+          target: env.TARGET
           file: ./Dockerfile
           build-args: |
             PYTHON_VERSION=${{ matrix.python-version }}
