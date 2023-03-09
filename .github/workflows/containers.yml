@@ -16,9 +16,6 @@ jobs:
         python-version: ['3.7','3.8','3.9','3.10']
         platform: ['core', 'pycuda', 'cupy']
       name: Building container for ${{ matrix.platform }} with Python ${{ matrix.python-version }}
-      permissions:
-        contents: read
-	packages: write
       steps:
         - name: Checkout
 	  uses: actions/checkout@v3
