@@ -22,6 +22,7 @@ jobs:
       - name: Build Image
         uses: docker/build-push-action@v4
 	with:
+	  context: .
 	  registry: registry
 	  repository: ptycho/ptypy/${{ matrix.platform }}_py${{ matrix.python-version }}_dev
 	  tags: ${{ github.sha }}
